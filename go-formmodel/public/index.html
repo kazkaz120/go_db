@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <!-- Vue.js -->
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <h1>フォームテスト</h1>
+            <form method="POST" action="writeout">
+            <input type="text" name="name">
+                <input type="submit" value="代入">
+            </form>
+        </div>
+        <script>
+            new Vue({
+                el: 'body',
+
+                data: {
+                    tasks: [],
+                },
+
+                methods: {
+                  showTask: function() {
+                      // Use the vue-resource $http client to fetch data from the /tasks route
+                      this.$http.get('/writeout').then(function(response) {
+                          this.tasks = response.data.items
+                      })
+                  },
+                }
+            })
+        </script>
+    </body>
+</html>
